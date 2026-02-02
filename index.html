@@ -1,311 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>Secure Mobile System</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUBG Mobile</title>
 <style>
-/* ===== THEME ===== */
-:root{
-  --bg:#070b0a; --fg:#00ff9c; --card:#0c1411;
-  --line:rgba(0,255,156,.35); --muted:rgba(0,255,156,.75);
-  --danger:#ff3b3b;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
 }
-.light{
-  --bg:#f4f7f6; --fg:#0a7; --card:#ffffff;
-  --line:rgba(0,160,120,.35); --muted:#0a7;
+header {
+    background-color: #1d1f23;
+    color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:Consolas,monospace}
-.app{
-  height:100%; max-width:430px; margin:0 auto;
-  display:grid; grid-template-rows:auto 1fr; position:relative; overflow:hidden;
-  border-left:1px solid rgba(255,255,255,.04); border-right:1px solid rgba(255,255,255,.04);
+header img {
+    height: 50px;
+    margin-right: 10px;
 }
-
-/* ===== TOP ===== */
-.top{display:flex;align-items:center;justify-content:space-between;padding:12px 14px}
-.brand{letter-spacing:2px;font-weight:700}
-.gear{font-size:18px;cursor:pointer}
-
-/* ===== STAGE ===== */
-.stage{position:relative}
-.panel{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:.45s ease}
-.hidden{opacity:0;pointer-events:none;transform:scale(.985)}
-.card{
-  width:92%; background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.85));
-  border:1px solid var(--line); border-radius:18px; padding:18px;
-  box-shadow:0 0 32px rgba(0,255,156,.22);
+header h1 {
+    font-size: 24px;
+    font-weight: bold;
 }
-h2{margin:0 0 10px}
-.small{font-size:12px;color:var(--muted)}
-input,button{
-  width:100%; padding:14px; border-radius:14px; font-size:15px;
-  background:transparent; color:var(--fg); border:1px solid var(--line); outline:none;
+.video-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative;
 }
-button{margin-top:10px;cursor:pointer}
-button.primary{
-  background:linear-gradient(90deg,rgba(0,255,156,.18),rgba(0,255,156,.38));
+video {
+    width: 100%;
+    border-radius: 10px;
 }
-
-/* ===== EFFECTS ===== */
-.glitch{animation:glitch 1.1s infinite}
-@keyframes glitch{
-  0%{text-shadow:0 0 6px rgba(0,255,156,.6)}
-  40%{text-shadow:2px 0 red,-2px 0 cyan}
-  80%{text-shadow:-2px 0 red,2px 0 cyan}
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
-.codes{
-  height:140px;margin:10px 0;padding:8px;border:1px dashed var(--line);
-  border-radius:12px;overflow:hidden;font-size:12px
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
-.codes div{animation:scroll 6s linear infinite}
-@keyframes scroll{to{transform:translateY(-50%)}}
-.progress{height:8px;border-radius:10px;background:#022;overflow:hidden}
-.bar{height:100%;width:0;background:linear-gradient(90deg,#0f8,#7fffd4);animation:load 8s linear forwards}
-@keyframes load{to{width:100%}}
-
-/* ===== LAUNCH OVERLAY ===== */
-.launch{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  background:radial-gradient(120% 80% at 50% 0%, rgba(0,255,156,.12), rgba(0,0,0,.85));
-  z-index:5; animation:launchOut .9s ease 1.9s forwards;
+button:hover {
+    transform: scale(1.2);
 }
-.launch .logo{
-  font-size:22px;letter-spacing:4px;font-weight:800;
-  animation:logoIn .9s ease, glitch .8s 1s 2;
+.like {
+    background-color: #1877f2;
+    color: white;
 }
-.scan{
-  position:absolute;left:-120%;top:0;width:120%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(0,255,156,.25),transparent);
-  animation:scan 1.2s ease .6s 2;
+.share {
+    background-color: #42b72a;
+    color: white;
 }
-@keyframes logoIn{from{transform:scale(.6);filter:blur(8px);opacity:0}to{transform:scale(1);filter:none;opacity:1}}
-@keyframes scan{to{left:120%}}
-@keyframes launchOut{to{opacity:0;pointer-events:none}}
-
-/* ===== SETTINGS ===== */
-.modal{
-  position:absolute;right:10px;top:52px;width:220px;background:var(--card);
-  border:1px solid var(--line);border-radius:14px;padding:10px;
-  box-shadow:0 0 26px rgba(0,255,156,.18)
+.views {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255,255,255,0.7);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
 }
-.row{display:flex;justify-content:space-between;align-items:center;padding:6px 4px;font-size:13px}
-.toggle{cursor:pointer}
-
-/* ===== MAP (MOBILE TOGGLE) ===== */
-.mapWrap{
-  position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
-  width:92%;height:34vh;border:1px solid var(--line);border-radius:16px;
-  box-shadow:0 0 26px rgba(0,255,156,.18);overflow:hidden;background:#020403
-}
-.mapHidden{display:none}
-
-/* ===== MATRIX BG ===== */
-#matrix{position:absolute;inset:0;opacity:.32;pointer-events:none}
-
-/* ===== FOOTER ===== */
-.footer{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:11px;opacity:.6}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="top">
-    <div class="brand glitch" data-en="SYSTEM" data-ar="النظام">SYSTEM</div>
-    <div class="gear" onclick="toggleSettings()">⚙️</div>
-  </div>
 
-  <div class="stage">
-    <canvas id="matrix"></canvas>
+<header>
+    <img src="unnamed.webp" alt="Logo">
+    <h1>PUBG Mobile</h1>
+</header>
 
-    <!-- LAUNCH -->
-    <div class="launch">
-      <div class="logo" data-en="SECURE INIT" data-ar="تهيئة آمنة">SECURE INIT</div>
-      <div class="scan"></div>
+<div class="video-container" id="video1-container">
+    <div class="views">0 Views</div>
+    <video id="video1" controls>
+        <!-- سيتم إضافة الفيديوهات بعد النشر -->
+    </video>
+    <div class="controls">
+        <button class="like" onclick="likeVideo('video1')">👍 0</button>
+        <button class="share" onclick="shareVideo('video1')">↗️ Share</button>
+        <button onclick="rotateVideo('video1')">⟳ Rotate</button>
+        <button onclick="toggleMute('video1')">🎤</button>
     </div>
-
-    <!-- SCREEN 1 -->
-    <div class="panel" id="s1">
-      <div class="card">
-        <h2 data-en="Access Request" data-ar="طلب الوصول">Access Request</h2>
-        <input id="inp" placeholder="Phone Number or Email">
-        <button class="primary" onclick="go2()" data-en="NEXT" data-ar="التالي">NEXT</button>
-        <div class="small" data-en="Secure Channel" data-ar="قناة آمنة">Secure Channel</div>
-      </div>
-    </div>
-
-    <!-- SCREEN 2 -->
-    <div class="panel hidden" id="s2">
-      <div class="card">
-        <h2 class="glitch" data-en="Initializing" data-ar="جارِ التهيئة">Initializing</h2>
-        <div class="codes"><div id="codeFlow"></div></div>
-        <div class="progress"><div class="bar"></div></div>
-        <div class="small" id="ttsTxt">Please wait… Loading data</div>
-      </div>
-    </div>
-
-    <!-- SCREEN 3 -->
-    <div class="panel hidden" id="s3">
-      <div class="card">
-        <h2 data-en="Enter Code" data-ar="أدخل الكود">Enter Code</h2>
-        <input placeholder="dd.ch-AX91">
-        <input placeholder="dd.ch-ZK02">
-        <input placeholder="dd.ch-Q7M4">
-        <input placeholder="dd.ch-PL88">
-        <input placeholder="dd.ch-R9V3">
-        <button class="primary" onclick="go4()" data-en="VERIFY" data-ar="تحقق">VERIFY</button>
-      </div>
-    </div>
-
-    <!-- SCREEN 4 -->
-    <div class="panel hidden" id="s4">
-      <div class="card">
-        <h2 class="glitch" data-en="Finalizing" data-ar="جارِ الانتهاء">Finalizing</h2>
-        <div class="codes"><div id="codeFlow2"></div></div>
-        <div class="progress"><div class="bar"></div></div>
-        <button class="primary" onclick="download()" data-en="Download" data-ar="تنزيل">Download</button>
-      </div>
-    </div>
-
-    <!-- SETTINGS -->
-    <div class="modal hidden" id="settings">
-      <div class="row">
-        <span data-en="Theme" data-ar="الثيم">Theme</span>
-        <span class="toggle" onclick="toggleTheme()" data-en="Light / Dark" data-ar="فاتح / غامق">Light / Dark</span>
-      </div>
-      <div class="row">
-        <span data-en="Language" data-ar="اللغة">Language •</span>
-        <span class="toggle" onclick="toggleLang()">EN / AR</span>
-      </div>
-      <div class="row">
-        <span data-en="Map" data-ar="الخريطة">Map</span>
-        <span class="toggle" onclick="toggleMap()">Show / Hide</span>
-      </div>
-    </div>
-
-    <!-- MAP -->
-    <div class="mapWrap mapHidden" id="mapWrap">
-      <canvas id="map"></canvas>
-    </div>
-
-    <div class="footer" data-en="Al-Najm" data-ar="النجم">Al-Najm</div>
-  </div>
 </div>
 
-<!-- AUDIO: balanced -->
-<audio id="hum" loop autoplay>
-  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-01.mp3" type="audio/mpeg">
-</audio>
+<div class="video-container" id="video2-container">
+    <div class="views">0 Views</div>
+    <video id="video2" controls></video>
+    <div class="controls">
+        <button class="like" onclick="likeVideo('video2')">👍 0</button>
+        <button class="share" onclick="shareVideo('video2')">↗️ Share</button>
+        <button onclick="rotateVideo('video2')">⟳ Rotate</button>
+        <button onclick="toggleMute('video2')">🎤</button>
+    </div>
+</div>
+
+<div class="video-container" id="video3-container">
+    <div class="views">0 Views</div>
+    <video id="video3" controls></video>
+    <div class="controls">
+        <button class="like" onclick="likeVideo('video3')">👍 0</button>
+        <button class="share" onclick="shareVideo('video3')">↗️ Share</button>
+        <button onclick="rotateVideo('video3')">⟳ Rotate</button>
+        <button onclick="toggleMute('video3')">🎤</button>
+    </div>
+</div>
 
 <script>
-/* ===== UTIL ===== */
-const $=id=>document.getElementById(id);
-const s1=$('s1'),s2=$('s2'),s3=$('s3'),s4=$('s4');
-const hide=e=>e.classList.add('hidden'), show=e=>e.classList.remove('hidden');
-
-/* ===== AUDIO/VIBRATION PROFILES ===== */
-const hum=$('hum'); hum.volume=0.18; // خلفية خفيفة
-const beep=()=>{ const a=new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3'); a.volume=.35; a.play(); }
-const alarm=()=>{ const a=new Audio('https://www.soundjay.com/buttons/sounds/beep-07.mp3'); a.volume=.6; a.play(); }
-const vibTap=()=>navigator.vibrate&&navigator.vibrate(20);
-const vibProg=()=>navigator.vibrate&&navigator.vibrate([60,40,60]);
-const vibAlert=()=>navigator.vibrate&&navigator.vibrate([140,80,140]);
-
-/* ===== LANGUAGE ===== */
-let lang='en';
-function setLang(l){
-  lang=l;
-  document.querySelectorAll('[data-en]').forEach(el=>{
-    el.textContent=(lang==='en')?el.dataset.en:el.dataset.ar;
-  });
-  speak();
-}
-function toggleLang(){ setLang(lang==='en'?'ar':'en'); }
-
-/* ===== SETTINGS ===== */
-function toggleSettings(){ $('settings').classList.toggle('hidden'); vibTap(); }
-function toggleTheme(){ document.body.classList.toggle('light'); vibTap(); }
-
-/* ===== MAP ===== */
-let mapVisible=false;
-function toggleMap(){ mapVisible=!mapVisible; $('mapWrap').classList.toggle('mapHidden',!mapVisible); vibTap(); }
-
-/* ===== TTS ===== */
-function speak(){
-  try{
-    const u=new SpeechSynthesisUtterance(
-      lang==='ar'?'الرجاء الانتظار… جاري تحميل البيانات':'Please wait… Loading data'
-    );
-    u.lang='ar-EG'; u.rate=.95; u.pitch=1; speechSynthesis.speak(u);
-  }catch(e){}
+function rotateVideo(videoId) {
+    const vid = document.getElementById(videoId);
+    vid.style.transform = vid.style.transform === "rotate(90deg)" ? "rotate(0deg)" : "rotate(90deg)";
+    vid.style.transition = "transform 0.5s";
 }
 
-/* ===== MATRIX ===== */
-const c=$('matrix'),ctx=c.getContext('2d');
-function resize(){ c.width=$('.app')?.clientWidth||innerWidth; c.height=innerHeight; }
-resize(); addEventListener('resize',resize);
-const chars='01ABCDEF#$%'; const drops=Array(160).fill(1);
-setInterval(()=>{
-  ctx.fillStyle='rgba(0,0,0,.22)'; ctx.fillRect(0,0,c.width,c.height);
-  ctx.fillStyle=getComputedStyle(document.body).getPropertyValue('--fg'); ctx.font='12px monospace';
-  drops.forEach((y,i)=>{
-    ctx.fillText(chars[Math.floor(Math.random()*chars.length)], i*10, y*10);
-    if(y*10>c.height && Math.random()>0.975) drops[i]=0; drops[i]++;
-  });
-},50);
-
-/* ===== CODES ===== */
-function fill(el){ let s=''; for(let i=0;i<120;i++) s+=`[${Math.random().toString(16).slice(2,8)}] ACCESS\n`; el.textContent=s; }
-fill($('codeFlow')); fill($('codeFlow2'));
-
-/* ===== NAV + VALIDATION ===== */
-function danger(){
-  const mw=$('mapWrap');
-  if(mw){ mw.style.borderColor='var(--danger)'; setTimeout(()=>mw.style.borderColor='var(--line)',1600); }
-  alarm(); vibAlert();
-}
-function go2(){
-  vibTap();
-  const v=$('inp').value.trim();
-  if(v.length<8 || v.length>15){ danger(); return; }
-  localStorage.setItem('id',v);
-  hide(s1); show(s2); beep(); vibProg(); speak();
-  setTimeout(()=>{ hide(s2); show(s3); },2600);
-}
-function go4(){
-  vibTap();
-  let ok=true; document.querySelectorAll('#s3 input').forEach(i=>{ if(i.value.length<6) ok=false; });
-  if(!ok){ danger(); return; }
-  hide(s3); show(s4); beep(); vibProg(); speak();
+function toggleMute(videoId) {
+    const vid = document.getElementById(videoId);
+    vid.muted = !vid.muted;
 }
 
-/* ===== MAP DRAW ===== */
-const m=$('map'),mx=m.getContext('2d');
-function mResize(){ m.width=$('mapWrap').clientWidth; m.height=$('mapWrap').clientHeight; }
-addEventListener('resize',mResize);
-setInterval(()=>{
-  if($('mapWrap').classList.contains('mapHidden')) return;
-  mResize(); mx.clearRect(0,0,m.width,m.height);
-  mx.strokeStyle='rgba(0,255,156,.22)';
-  for(let x=0;x<m.width;x+=40){ mx.beginPath(); mx.moveTo(x,0); mx.lineTo(x,m.height); mx.stroke(); }
-  for(let y=0;y<m.height;y+=40){ mx.beginPath(); mx.moveTo(0,y); mx.lineTo(m.width,y); mx.stroke(); }
-  for(let i=0;i<8;i++){
-    const x=Math.random()*m.width,y=Math.random()*m.height;
-    mx.fillStyle='rgba(0,255,156,.9)'; mx.beginPath(); mx.arc(x,y,2.5,0,Math.PI*2); mx.fill();
-    mx.strokeStyle='rgba(0,255,156,.45)'; mx.beginPath(); mx.arc(x,y,12,0,Math.PI*2); mx.stroke();
-  }
-},900);
-
-/* ===== DOWNLOAD ===== */
-function download(){
-  beep(); vibTap();
-  const blob=new Blob([document.documentElement.outerHTML],{type:'text/html'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='mobile_system.html'; a.click();
+function likeVideo(videoId) {
+    const btn = document.getElementById(videoId).parentElement.querySelector('.like');
+    let current = parseInt(btn.innerText.replace(/[^0-9]/g, ''));
+    current += 1;
+    btn.innerText = "👍 " + current;
 }
 
-/* INIT */
-setLang('en');
+function shareVideo(videoId) {
+    alert("Share options: WhatsApp, Telegram, TikTok");
+}
 </script>
+
 </body>
 </html>
